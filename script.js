@@ -40,6 +40,15 @@ function createTaskNode(todo, index) {
     const textSpan = document.createElement("span");
     textSpan.textContent = todo.task;
     if (todo.isCompleted) textSpan.style.textDecoration = "line-through";
+    textSpan.addEventListener("dblclick", () => {
+        const newText = prompt("Enter the new todo", todo.task);
+        
+        if (newText === null || !newText.trim()) return;
+
+        todos[index].task = newText.trim();
+
+        render();
+    });
 
     const dltBtn = document.createElement("button");
     dltBtn.textContent = "Delete";
