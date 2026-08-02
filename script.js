@@ -25,13 +25,22 @@ input.addEventListener("keydown", (event) => {
     }
 });
 
-function createTaskNode(todo) {
+function createTaskNode(todo, index) {
     const li = document.createElement("li");
 
     const textSpan = document.createElement("span");
     textSpan.textContent = todo.task;
 
+    const dltBtn = document.createElement("button");
+    dltBtn.textContent = "Delete";
+
+    dltBtn.addEventListener("click", () => {
+        todos.splice(index, 1);
+        render();
+    });
+
     li.appendChild(textSpan);
+    li.appendChild(dltBtn);
 
     return li;
 }
@@ -39,7 +48,7 @@ function createTaskNode(todo) {
 function render() {
     list.innerHTML = "";
 
-    todos.forEach((todo) => {
-        list.append(createTaskNode(todo));
+    todos.forEach((todo, index) => {
+        list.append(createTaskNode(todo, index));
     });
 }
