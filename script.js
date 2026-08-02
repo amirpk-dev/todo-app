@@ -28,8 +28,18 @@ input.addEventListener("keydown", (event) => {
 function createTaskNode(todo, index) {
     const li = document.createElement("li");
 
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = todo.isCompleted;
+    checkbox.addEventListener("change", () => {
+        todo.isCompleted = checkbox.checked;
+
+        textSpan.style.textDecoration = todo.isCompleted ? "line-through" : "";
+    });
+
     const textSpan = document.createElement("span");
     textSpan.textContent = todo.task;
+    if (todo.isCompleted) textSpan.style.textDecoration = "line-through";
 
     const dltBtn = document.createElement("button");
     dltBtn.textContent = "Delete";
@@ -39,6 +49,7 @@ function createTaskNode(todo, index) {
         render();
     });
 
+    li.appendChild(checkbox);
     li.appendChild(textSpan);
     li.appendChild(dltBtn);
 
