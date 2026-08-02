@@ -2,7 +2,13 @@ const input = document.getElementById("todo-input");
 const addBtn = document.getElementById("add-todo");
 const list = document.getElementById("todo-list");
 
-const todos = [];
+const saved = localStorage.getItem("todos");
+const todos = saved ? JSON.parse(saved) : [];
+render();
+
+function saveTodos() {
+    localStorage.setItem("todos", JSON.stringify(todos));
+}
 
 function addTodo() {
     const text = input.value.trim();
@@ -14,6 +20,7 @@ function addTodo() {
         isCompleted: false
     });
 
+    saveTodos();
     render();
 }
 
@@ -47,6 +54,7 @@ function createTaskNode(todo, index) {
 
         todos[index].task = newText.trim();
 
+        saveTodos();
         render();
     });
 
@@ -55,6 +63,7 @@ function createTaskNode(todo, index) {
 
     dltBtn.addEventListener("click", () => {
         todos.splice(index, 1);
+        saveTodos();
         render();
     });
 
