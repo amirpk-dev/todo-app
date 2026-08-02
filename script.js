@@ -24,3 +24,22 @@ input.addEventListener("keydown", (event) => {
         addTodo();
     }
 });
+
+function createTaskNode(todo) {
+    const li = document.createElement("li");
+
+    const textSpan = document.createElement("span");
+    textSpan.textContent = todo.task;
+
+    li.appendChild(textSpan);
+
+    return li;
+}
+
+function render() {
+    list.innerHTML = "";
+
+    todos.forEach((todo) => {
+        list.append(createTaskNode(todo));
+    });
+}
