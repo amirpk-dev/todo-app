@@ -20,6 +20,7 @@ function addTodo() {
         isCompleted: false
     });
 
+    input.focus();
     saveTodos();
     render();
 }
